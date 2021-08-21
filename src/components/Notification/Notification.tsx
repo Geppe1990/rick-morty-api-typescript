@@ -1,5 +1,6 @@
 import React from 'react';
 import Cta from "../Cta/Cta";
+import './notification.scss'
 
 interface Props {
 	message: string,

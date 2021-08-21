@@ -1,6 +1,7 @@
 import React from 'react';
 import Cta from '../Cta/Cta';
 import Label from '../Label/Label';
+import './home.scss';
 
 const Home: React.FC = () => {
 	return (

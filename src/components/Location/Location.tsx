@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Label from "../Label/Label";
 import { getCurrentLocation, hasLocation } from "./helpers";
+import './location.scss';
 
 interface Props {
 	placement: string,

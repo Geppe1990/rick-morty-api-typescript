@@ -5,7 +5,7 @@ interface Props {
 	label?: string
 	tag?: string,
 	data?: string | number,
-	additionalData?: string
+	additionalData?: any
 }
 
 const Label: React.FC<Props> = ({tag, data, label, additionalData}) => {

@@ -6,6 +6,7 @@ import Pagination from "../Pagination/Pagination";
 import Notification from "../Notification/Notification";
 import Location from "../Location/Location";
 import { getUser, hasCharacter, hasError } from "./helpers";
+import './character.scss';
 
 interface Props {}
 
@@ -30,7 +31,7 @@ const Character: React.FC<Props> = () => {
 	const [errorMessage, setErrorMessage] = useState("");
 	const { id } = useParams<{id: string}>();
 
-	// const _statusManager = (data) => data ? <span className={`status ${data.toLowerCase()}`}></span> : null;
+	const _statusManager = (data: string) => data ? <span className={`status ${data.toLowerCase()}`}></span> : null;
 
 	useEffect(() => {
 		getUser(id, setCharacter, setEpisodes, setErrorMessage);
@@ -55,7 +56,7 @@ const Character: React.FC<Props> = () => {
 						<Label
 							label={"Status: "}
 							data={character.status}
-							//additionalData={_statusManager(character.status)}
+							additionalData={_statusManager(character.status)}
 						/>
 						<Label label={"Species: "} data={character.species} />
 						<Label label={"Type: "} data={character.type} />

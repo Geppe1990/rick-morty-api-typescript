@@ -4,11 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Character from './components/Character/Character';
 import Home from './components/Home/Home';
 
-interface Props {
-   name: string
-}
-
-const App: React.FC<Props> = () => {
+const App: React.FC = () => {
 	return (
 		<>
 			<Router>

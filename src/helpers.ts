@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
-export const get = (url, callback, errorCallback) => {
+export const get = (url: string, callback: any, errorCallback: any) => {
 	if (!url) {
 		return;
 	}
@@ -13,7 +13,7 @@ export const get = (url, callback, errorCallback) => {
 		.catch((error) => _errorsManager(error, errorCallback));
 };
 
-export const getAll = (urls, callback, errorCallback) => {
+export const getAll = (urls: Promise<AxiosResponse<any>>[], callback: any, errorCallback: any) => {
 	if (!urls) {
 		return;
 	}
@@ -26,7 +26,15 @@ export const getAll = (urls, callback, errorCallback) => {
 		.catch((error) => _errorsManager(error, errorCallback));
 };
 
-const _errorsManager = (error, callback) => {
+const _errorsManager = (error: {
+	request: string,
+	message: string,
+	response: {
+		data: {
+			error: string
+		}
+	}
+}, callback: any) => {
 	if (error.response) {
 		console.log(error.response.data);
 		callback(error.response.data.error);

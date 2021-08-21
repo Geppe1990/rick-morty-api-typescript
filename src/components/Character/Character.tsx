@@ -71,7 +71,7 @@ const Character: React.FC<Props> = () => {
 				) : null}
 				<Badges keys={episodes} title={"Appears in: "} />
 			</div>
-			<Pagination id={id} />
+			<Pagination id={parseInt(id)} />
 		</div>
 	);
 }

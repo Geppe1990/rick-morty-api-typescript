@@ -4,7 +4,7 @@ import { getcurrentPage, hasPrev, hasNext } from "./helpers";
 import { NavLink } from "react-router-dom";
 
 interface Props {
-	id: string
+	id: number
 }
 
 const Pagination: React.FC<Props> = ({ id }) => {
@@ -42,10 +42,10 @@ const Pagination: React.FC<Props> = ({ id }) => {
 
 	return (
 		<ul className="pagination">
-			{hasPrev(id) ? _pageManager("prev", `${parseInt(id) - 1}`) : null}
+			{hasPrev(id) ? _pageManager("prev", `${id - 1}`) : null}
 			{pages.map((page: {id: string}, index: number) => _pageManager("", page.id, index.toString()))}
 			{hasNext(id, totalCharacters)
-				? _pageManager("next", `${parseInt(id) + 1}`)
+				? _pageManager("next", `${id + 1}`)
 				: null}
 		</ul>
 	);

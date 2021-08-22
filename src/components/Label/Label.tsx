@@ -5,7 +5,7 @@ interface IProps {
 	label?: string
 	tag?: string,
 	data?: string | number,
-	additionalData?: any
+	additionalData?: JSX.Element | null
 }
 
 const Label: React.FC<IProps> = ({tag, data, label, additionalData}) => {

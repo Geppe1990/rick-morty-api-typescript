@@ -8,13 +8,11 @@ import Location from "../Location/Location";
 import { getUser, hasCharacter, hasError } from "./helpers";
 import './character.scss';
 
-interface IProps {}
-
 export interface IState{
 	episodes: {
 		data: {
-			name: String,
-			episode: String
+			name: string,
+			episode: string
 		}
 	}[],
 	character: {
@@ -36,7 +34,7 @@ export interface IState{
 	errors: string
 }
 
-const Character: React.FC<IProps> = () => {
+const Character: React.FC = () => {
 	const [character, setCharacter] = useState<IState["character"]>({
 		'image': "",
 		'name': "",

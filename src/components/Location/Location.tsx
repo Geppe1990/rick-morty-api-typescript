@@ -12,7 +12,7 @@ export interface IState {
 		name: string,
 		type: string,
 		dimension: string,
-		residents: Array<String>
+		residents: Array<string>
 	},
 	errors: string
 }

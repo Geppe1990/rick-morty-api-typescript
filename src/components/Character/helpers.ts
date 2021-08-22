@@ -8,13 +8,13 @@ export const getUser = (
 	callbackCharacter: React.Dispatch<React.SetStateAction<Props["character"]>>,
 	callbackEpisodes: React.Dispatch<React.SetStateAction<Props["episodes"]>>,
 	callbackError: React.Dispatch<React.SetStateAction<Props["errors"]>>,
-) => {
-	const url: string = `${endpoints.CHARACTER}${id}`;
+): void => {
+	const url = `${endpoints.CHARACTER}${id}`;
 
 	axios
 		.get(url)
 		.then((response) => {
-			var episodesCalls: Promise<AxiosResponse<any>>[] = [];
+			const episodesCalls: Promise<AxiosResponse<any>>[] = [];
 
 			response.data.episode.forEach((url: string) =>
 				url ? episodesCalls.push(axios.get(url)) : null
@@ -26,8 +26,8 @@ export const getUser = (
 		.catch((error) => errorsManager(error, callbackError));
 };
 
-export const hasCharacter = (character: object): boolean => Object.keys(character).length > 0;
-export const hasError = (errorMessage: string) => errorMessage && errorMessage.length != 0;
+export const hasCharacter = (character: Props["character"]): boolean => Object.keys(character).length > 0;
+export const hasError = (errorMessage: string) : boolean => (errorMessage && errorMessage.length) != 0;
 
 const _getEpisodes = (
 	urls: Promise<AxiosResponse<any>>[], 

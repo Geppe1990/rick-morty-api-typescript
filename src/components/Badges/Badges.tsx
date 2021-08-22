@@ -5,8 +5,8 @@ import './badges.scss';
 interface IProps {
 	keys: {
 		data: {
-			name: String,
-			episode: String
+			name: string,
+			episode: string
 		}
 	}[],
 	title: string;

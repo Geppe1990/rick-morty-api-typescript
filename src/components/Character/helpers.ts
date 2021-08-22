@@ -17,7 +17,7 @@ export const getUser = (
 			const episodesCalls: Promise<AxiosResponse<any>>[] = [];
 
 			response.data.episode.forEach((url: string) =>
-				url ? episodesCalls.push(axios.get(url)) : null
+				episodesCalls.push(axios.get(url))
 			);
 
 			callbackCharacter(response.data);

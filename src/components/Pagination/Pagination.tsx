@@ -10,7 +10,6 @@ interface IProps {
 
 export interface IState {
 	pages: {
-		created: string,
 		episode: [],
 		gender: string,
 		id: string,

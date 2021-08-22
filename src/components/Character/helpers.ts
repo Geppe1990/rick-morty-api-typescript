@@ -33,6 +33,7 @@ const _getEpisodes = (
 	urls: Promise<AxiosResponse<any>>[], 
 	episodesCallback: React.Dispatch<React.SetStateAction<Props["episodes"]>>, 
 	errorCallback: React.Dispatch<React.SetStateAction<Props["errors"]>>) => {
+
 	axios
 		.all(urls)
 		.then((response) => {

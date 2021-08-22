@@ -1,32 +1,4 @@
-import axios, { AxiosResponse } from "axios";
-
-export const get = (url: string, callback: any, errorCallback: any) => {
-	if (!url) {
-		return;
-	}
-
-	axios
-		.get(url)
-		.then((response) => {
-			callback(response);
-		})
-		.catch((error) => _errorsManager(error, errorCallback));
-};
-
-export const getAll = (urls: Promise<AxiosResponse<any>>[], callback: any, errorCallback: any) => {
-	if (!urls) {
-		return;
-	}
-
-	axios
-		.all(urls)
-		.then((response) => {
-			callback(response);
-		})
-		.catch((error) => _errorsManager(error, errorCallback));
-};
-
-const _errorsManager = (error: {
+export const errorsManager = (error: {
 	request: string,
 	message: string,
 	response: {

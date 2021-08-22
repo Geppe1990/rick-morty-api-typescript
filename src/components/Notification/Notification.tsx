@@ -2,12 +2,12 @@ import React from 'react';
 import Cta from "../Cta/Cta";
 import './notification.scss'
 
-interface Props {
+interface IProps {
 	message: string,
 	type: string
 }
 
-const Notification: React.FC<Props> = ({type, message}) => {
+const Notification: React.FC<IProps> = ({type, message}) => {
 	return (
 		<div className="container">
 			<div className={`notification ${type}`}>

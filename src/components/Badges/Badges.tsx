@@ -2,7 +2,7 @@ import React from 'react';
 import Label from "../Label/Label";
 import './badges.scss';
 
-interface Props {
+interface IProps {
 	keys: {
 		data: {
 			name: String,
@@ -12,7 +12,7 @@ interface Props {
 	title: string;
 }
 
-const Badges: React.FC<Props> = ({ keys, title}) => {
+const Badges: React.FC<IProps> = ({ keys, title }) => {
 	return (
 		<div className="badges">
 			<Label tag={"h2"} data={title}></Label>

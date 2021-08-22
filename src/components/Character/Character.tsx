@@ -8,10 +8,36 @@ import Location from "../Location/Location";
 import { getUser, hasCharacter, hasError } from "./helpers";
 import './character.scss';
 
-interface Props {}
+interface IProps {}
 
-const Character: React.FC<Props> = () => {
-	const [character, setCharacter] = useState({
+export interface IState{
+	episodes: {
+		data: {
+			name: String,
+			episode: String
+		}
+	}[],
+	character: {
+		image: string,
+		name: string,
+		status: string,
+		species: string,
+		type: string,
+		gender: string,
+		location: {
+			name: string,
+			url: string
+		},
+		origin: {
+			name: string,
+			url: string,
+		}
+	},
+	errors: string
+}
+
+const Character: React.FC<IProps> = () => {
+	const [character, setCharacter] = useState<IState["character"]>({
 		'image': "",
 		'name': "",
 		'status': "",
@@ -27,7 +53,8 @@ const Character: React.FC<Props> = () => {
 			'url': "",
 		}
 	});
-	const [episodes, setEpisodes] = useState([]);
+	
+	const [episodes, setEpisodes] = useState<IState["episodes"]>([]);
 	const [errorMessage, setErrorMessage] = useState("");
 	const { id } = useParams<{id: string}>();
 

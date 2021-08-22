@@ -3,12 +3,22 @@ import Label from "../Label/Label";
 import { getCurrentLocation, hasLocation } from "./helpers";
 import './location.scss';
 
-interface Props {
+interface IProps {
 	placement: string,
 }
 
-const Location: React.FC<Props> = ({ placement }) => {
-	const [location, setlocation] = useState({
+export interface IState {
+	location: {
+		name: string,
+		type: string,
+		dimension: string,
+		residents: Array<String>
+	},
+	errors: string
+}
+
+const Location: React.FC<IProps> = ({ placement }) => {
+	const [location, setlocation] = useState<IState["location"]>({
 		'name': "",
 		'type': "",
 		'dimension': "",

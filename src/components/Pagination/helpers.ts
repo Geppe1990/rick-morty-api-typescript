@@ -1,29 +1,25 @@
+import React from "react";
 import { endpoints } from "../../variables";
-import { get } from "../../helpers";
+import { errorsManager } from "../../helpers";
+import { IState as Props } from "./Pagination";
+import axios, { AxiosResponse } from "axios";
 
 export const getcurrentPage = (
 	id: number,
-	callbackPages: any,
-	callbackCharacters: any,
-	callbackError: any
+	callbackPages: React.Dispatch<React.SetStateAction<Props["pages"]>>,
+	callbackCharacters: React.Dispatch<React.SetStateAction<Props["characters"]>>,
+	callbackError: React.Dispatch<React.SetStateAction<Props["errors"]>>
 ) => {
-	const currentPage = id / 20 < 0 ? 1 : Math.ceil(id / 20);
+	const currentPage: number = id / 20 < 0 ? 1 : Math.ceil(id / 20);
+	const url: string = `${endpoints.CHARACTER}?page=${currentPage}`;
 
-	get(
-		`${endpoints.CHARACTER}?page=${currentPage}`,
-		(response: {
-			data: {
-				results: {}
-				info: {
-					count: number 
-				}
-			}
-		}) => {
+	axios
+		.get(url)
+		.then((response) => {
 			callbackPages(response.data.results);
 			callbackCharacters(response.data.info.count);
-		},
-		callbackError
-	);
+		})
+		.catch((error) => errorsManager(error, callbackError));
 };
 
 export const hasPrev = (id: number) => !(id <= 1);

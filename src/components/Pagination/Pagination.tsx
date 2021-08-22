@@ -4,14 +4,33 @@ import { getcurrentPage, hasPrev, hasNext } from "./helpers";
 import { NavLink } from "react-router-dom";
 import './pagination.scss'
 
-interface Props {
+interface IProps {
 	id: number
 }
 
-const Pagination: React.FC<Props> = ({ id }) => {
-	const [pages, setPages] = useState([]);
+export interface IState {
+	pages: {
+		created: string,
+		episode: [],
+		gender: string,
+		id: string,
+		image: string,
+		location: {name: string, url: string},
+		name: string,
+		origin: {name: string, url: string},
+		species: string,
+		status: string,
+		type: string,
+	}[],
+	characters: number,
+	errors: string
+}
+
+const Pagination: React.FC<IProps> = ({ id }) => {
+	const [pages, setPages] = useState<IState["pages"]>([]);
 	const [totalCharacters, setTotalCharacters] = useState(1);
 	const [errorMessage, setErrorMessage] = useState("");
+	console.log("pages", pages)
 
 	useEffect(() => {
 		getcurrentPage(id, setPages, setTotalCharacters, setErrorMessage);
@@ -44,7 +63,7 @@ const Pagination: React.FC<Props> = ({ id }) => {
 	return (
 		<ul className="pagination">
 			{hasPrev(id) ? _pageManager("prev", `${id - 1}`) : null}
-			{pages.map((page: {id: string}, index: number) => _pageManager("", page.id, index.toString()))}
+			{pages.map((page, index) => _pageManager("", page.id, index.toString()))}
 			{hasNext(id, totalCharacters)
 				? _pageManager("next", `${id + 1}`)
 				: null}

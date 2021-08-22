@@ -1,14 +1,14 @@
 
 import React from 'react';
 
-interface Props {
+interface IProps {
 	label?: string
 	tag?: string,
 	data?: string | number,
 	additionalData?: any
 }
 
-const Label: React.FC<Props> = ({tag, data, label, additionalData}) => {
+const Label: React.FC<IProps> = ({tag, data, label, additionalData}) => {
 	switch (tag) {
 		case "h1":
 			return <h1>{data}</h1>;

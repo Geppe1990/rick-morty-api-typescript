@@ -1,45 +1,42 @@
 import { endpoints } from "../../variables";
-import { get, getAll } from "../../helpers";
+import { errorsManager } from "../../helpers";
 import axios, { AxiosResponse } from "axios";
+import { IState as Props } from "./Character";
 
 export const getUser = (
 	id: string,
-	callbackCharacter: any,
-	callbackEpisodes: any,
-	callbackError: any
+	callbackCharacter: React.Dispatch<React.SetStateAction<Props["character"]>>,
+	callbackEpisodes: React.Dispatch<React.SetStateAction<Props["episodes"]>>,
+	callbackError: React.Dispatch<React.SetStateAction<Props["errors"]>>,
 ) => {
-	get(
-		`${endpoints.CHARACTER}${id}`,
-		(response: {data: {
-			episode: []
-		}}) => {
+	const url: string = `${endpoints.CHARACTER}${id}`;
+
+	axios
+		.get(url)
+		.then((response) => {
 			var episodesCalls: Promise<AxiosResponse<any>>[] = [];
 
-			response.data.episode.forEach((url) =>
+			response.data.episode.forEach((url: string) =>
 				url ? episodesCalls.push(axios.get(url)) : null
 			);
 
 			callbackCharacter(response.data);
 			_getEpisodes(episodesCalls, callbackEpisodes, callbackError);
-		},
-		callbackError
-	);
+		})
+		.catch((error) => errorsManager(error, callbackError));
 };
 
-export const hasCharacter = (character: object) => {
-	return Object.keys(character).length > 0;
-};
+export const hasCharacter = (character: object): boolean => Object.keys(character).length > 0;
+export const hasError = (errorMessage: string) => errorMessage && errorMessage.length != 0;
 
-export const hasError = (errorMessage: string) => {
-	return errorMessage && errorMessage.length != 0;
-};
-
-const _getEpisodes = (urls: Promise<AxiosResponse<any>>[], episodesCallback: any, errorCallback: any) => {
-	getAll(
-		urls,
-		(response: []) => {
+const _getEpisodes = (
+	urls: Promise<AxiosResponse<any>>[], 
+	episodesCallback: React.Dispatch<React.SetStateAction<Props["episodes"]>>, 
+	errorCallback: React.Dispatch<React.SetStateAction<Props["errors"]>>) => {
+	axios
+		.all(urls)
+		.then((response) => {
 			episodesCallback(response);
-		},
-		errorCallback
-	);
+		})
+		.catch((error) => errorsManager(error, errorCallback));
 };

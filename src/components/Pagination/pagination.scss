@@ -12,7 +12,7 @@
 
 	&__next,
 	&__prev {
-		color: $white;
+		color: $black;
 	}
 
 	li {
@@ -23,7 +23,7 @@
 		align-items: center;
 
 		a {
-			color: $white;
+			color: $black;
 			text-decoration: none;
 			display: flex;
 

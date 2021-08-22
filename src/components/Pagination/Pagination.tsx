@@ -30,7 +30,6 @@ const Pagination: React.FC<IProps> = ({ id }) => {
 	const [pages, setPages] = useState<IState["pages"]>([]);
 	const [totalCharacters, setTotalCharacters] = useState(1);
 	const [errorMessage, setErrorMessage] = useState("");
-	console.log("pages", pages)
 
 	useEffect(() => {
 		getcurrentPage(id, setPages, setTotalCharacters, setErrorMessage);

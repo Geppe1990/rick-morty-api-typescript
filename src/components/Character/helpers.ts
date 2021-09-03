@@ -14,9 +14,10 @@ export const getUser = (
 	axios
 		.get(url)
 		.then((response) => {
-			const episodesCalls: Promise<AxiosResponse<any>>[] = [];
+			const episodes = response.data.episode;
+			const episodesCalls: Promise<AxiosResponse>[] = [];
 
-			response.data.episode.forEach((url: string) =>
+			episodes.forEach((url: string) =>
 				episodesCalls.push(axios.get(url))
 			);
 
@@ -30,7 +31,7 @@ export const hasCharacter = (character: Props["character"]): boolean => Object.k
 export const hasError = (errorMessage: string) : boolean => (errorMessage && errorMessage.length) != 0;
 
 const _getEpisodes = (
-	urls: Promise<AxiosResponse<any>>[], 
+	urls: Promise<AxiosResponse>[], 
 	episodesCallback: React.Dispatch<React.SetStateAction<Props["episodes"]>>, 
 	errorCallback: React.Dispatch<React.SetStateAction<Props["errors"]>>) => {
 

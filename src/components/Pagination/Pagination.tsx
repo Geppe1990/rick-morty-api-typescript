@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { getcurrentPage, hasPrev, hasNext } from "./helpers";
 import { NavLink } from "react-router-dom";
+import useGetPages from "../../hooks/useGetPages";
 import './pagination.scss'
 
 interface IProps {
@@ -9,31 +9,16 @@ interface IProps {
 }
 
 export interface IState {
-	pages: {
-		episode: [],
-		gender: string,
-		id: string,
-		image: string,
-		location: {name: string, url: string},
-		name: string,
-		origin: {name: string, url: string},
-		species: string,
-		status: string,
-		type: string,
-	}[],
+	pages: { id: string }[],
 	characters: number,
 	errors: string
 }
 
 const Pagination: React.FC<IProps> = ({ id }) => {
-	const [pages, setPages] = useState<IState["pages"]>([]);
-	const [totalCharacters, setTotalCharacters] = useState(1);
-	const [errorMessage, setErrorMessage] = useState("");
+	const { pages, totalCharacters } = useGetPages(id);
 
-	useEffect(() => {
-		//TODO: CREARE HOOK
-		getcurrentPage(id, setPages, setTotalCharacters, setErrorMessage);
-	}, [id]);
+	const hasPrev = (id: number): boolean => !(id <= 1);
+	const hasNext = (id: number, characters: number): boolean => !(id == characters);
 
 	const _pageManager = (direction: string, link: string, key?: string) => {
 		if (!link) {
@@ -54,10 +39,6 @@ const Pagination: React.FC<IProps> = ({ id }) => {
 			</li>
 		);
 	};
-
-	if (errorMessage && errorMessage.length != 0) {
-		return null;
-	}
 
 	return (
 		<ul className="pagination">

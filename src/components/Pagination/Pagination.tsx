@@ -31,6 +31,7 @@ const Pagination: React.FC<IProps> = ({ id }) => {
 	const [errorMessage, setErrorMessage] = useState("");
 
 	useEffect(() => {
+		//TODO: CREARE HOOK
 		getcurrentPage(id, setPages, setTotalCharacters, setErrorMessage);
 	}, [id]);
 

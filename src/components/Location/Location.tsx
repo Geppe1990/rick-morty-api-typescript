@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import useGetLogation from '../../hooks/useGetLocation';
 import Label from "../Label/Label";
-import { getCurrentLocation, hasLocation } from "./helpers";
 import './location.scss';
 
 interface IProps {
@@ -18,38 +18,29 @@ export interface IState {
 }
 
 const Location: React.FC<IProps> = ({ placement }) => {
-	const [location, setlocation] = useState<IState["location"]>({
-		'name': "",
-		'type': "",
-		'dimension': "",
-		'residents': []
-	});
-	const [errorMessage, setErrorMessage] = useState("");
-
-	useEffect(() => {
-		getCurrentLocation(placement, setlocation, setErrorMessage);
-	}, [placement]);
-
-	if (errorMessage && errorMessage.length != 0) {
-		return <></>;
-	}
+	const { location } = useGetLogation(placement);
+	const hasLocation = (location: IState["location"] | undefined): boolean => {
+		return location !== undefined ? Object.keys(location).length > 0 : false
+	};
 
 	if (!hasLocation(location)) {
 		return <></>;
 	}
 
 	return (
-		<div className="location">
-			<Label tag={"h2"} data="Location"></Label>
-			<Label label={"Location: "} data={location.name} />
-			<Label label={"Dimension: "} data={location.dimension} />
-			<Label label={"Name: "} data={location.name} />
-			<Label label={"Type: "} data={location.type} />
-			<Label
-				label={"Residents: "}
-				data={location.residents ? location.residents.length : 0}
-			/>
-		</div>
+		location !== undefined ?
+			<div className="location">
+				<Label tag={"h2"} data="Location"></Label>
+				<Label label={"Location: "} data={location.name} />
+				<Label label={"Dimension: "} data={location.dimension} />
+				<Label label={"Name: "} data={location.name} />
+				<Label label={"Type: "} data={location.type} />
+				<Label
+					label={"Residents: "}
+					data={location.residents ? location.residents.length : 0}
+				/>
+			</div>
+		: null
 	);
 }
 

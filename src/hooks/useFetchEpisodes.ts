@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from "axios";
-import { IState as CharacterState } from "../components/Character/Character";
+import { IState } from "../interfaces/Episodes";
 
 const useFetchEpisodes = ( episodeList: [] | undefined ): {
-	episodes: CharacterState["episodes"] | undefined
+	episodes: IState["episodes"] | undefined
 } => {
-	const [episodes, setEpisodes] = useState<CharacterState["episodes"]>([])
+	const [episodes, setEpisodes] = useState<IState["episodes"]>([])
 	
 	useEffect(() => {
 		const episodesCalls: Promise<AxiosResponse>[] = [];

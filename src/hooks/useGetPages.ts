@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { IState as PaginationState } from '../components/Pagination/Pagination';
+import { IState } from '../interfaces/Pagination';
 import { endpoints } from "../../src/variables";
 
 const useGetPages = (id: number): {
-	pages: PaginationState["pages"],
+	pages: IState["pages"],
 	totalCharacters: number
 } => {
-	const [pages, setPages] = useState<PaginationState["pages"]>([])
+	const [pages, setPages] = useState<IState["pages"]>([])
 	const [totalCharacters, setTotalCharacters] = useState(1)
 	const currentPage: number = id / 20 < 0 ? 1 : Math.ceil(id / 20);
 	const url = `${endpoints.CHARACTER}?page=${currentPage}`;

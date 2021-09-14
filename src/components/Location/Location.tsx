@@ -1,20 +1,11 @@
 import React from 'react';
 import useGetLogation from '../../hooks/useGetLocation';
 import Label from "../Label/Label";
+import { IState } from '../../interfaces/Location';
 import './location.scss';
 
 interface IProps {
 	placement: string,
-}
-
-export interface IState {
-	location: {
-		name: string,
-		type: string,
-		dimension: string,
-		residents: Array<string>
-	},
-	errors: string
 }
 
 const Location: React.FC<IProps> = ({ placement }) => {

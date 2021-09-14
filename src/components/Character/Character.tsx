@@ -8,33 +8,6 @@ import useFetchUser from '../../hooks/useFetchUser';
 import './character.scss';
 import useFetchEpisodes from '../../hooks/useFetchEpisodes';
 
-export interface IState{
-	episodes: {
-		data: {
-			name: string,
-			episode: string
-		}
-	}[],
-	character: {
-		image: string,
-		name: string,
-		status: string,
-		species: string,
-		type: string,
-		gender: string,
-		episode: [],
-		location: {
-			name: string,
-			url: string
-		},
-		origin: {
-			name: string,
-			url: string,
-		}
-	},
-	errors: string
-}
-
 const Character: React.FC = () => {
 	const { id } = useParams<{id: string}>();
 	const { character } = useFetchUser(id);

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { endpoints } from "../../src/variables";
-import { IState as CharacterState} from "../components/Character/Character";
+import { IState } from "../interfaces/Character";
 
 const useFetchUser = ( id: string ): {
-	character: CharacterState["character"] | undefined, 
+	character: IState["character"] | undefined, 
 	loading: boolean
 } => {
-  const [character, setCharacter] = useState<CharacterState["character"]>();
+  const [character, setCharacter] = useState<IState["character"]>();
   const [loading, setLoading] = useState(false);
   const url = `${endpoints.CHARACTER}${id}`;
 

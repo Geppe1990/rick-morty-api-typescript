@@ -8,12 +8,6 @@ interface IProps {
 	id: number
 }
 
-export interface IState {
-	pages: { id: string }[],
-	characters: number,
-	errors: string
-}
-
 const Pagination: React.FC<IProps> = ({ id }) => {
 	const { pages, totalCharacters } = useGetPages(id);
 

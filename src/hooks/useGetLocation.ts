@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from "axios";
-import { IState as LocationState } from "../components/Location/Location";
+import axios from "axios";
+import { IState } from '../interfaces/Location';
 
 const useGetLogation = (url: string): {
-	location: LocationState["location"] | undefined, 
+	location: IState["location"] | undefined, 
 } => {
-	const [location, setLocation] = useState<LocationState["location"]>(Object);
+	const [location, setLocation] = useState<IState["location"]>(Object);
 
 	useEffect(() => {
 		const fetchData = async () => {

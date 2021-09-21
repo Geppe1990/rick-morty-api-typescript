@@ -7,7 +7,7 @@ interface IProps {
 	link: string
 }
 
-const Cta: React.FC<IProps> = ({ link, text}) => (
+const Cta: React.FC<IProps> = ({ link, text }) => (
 	<Link className="cta" to={link}>
 		{text}
 	</Link>
